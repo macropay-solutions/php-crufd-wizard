@@ -1,0 +1,45 @@
+{
+  "name": "macropay-solutions/php-crufd-wizard",
+  "type": "library",
+  "description": "Free library for PHP Framework crufd operations including url query language",
+  "keywords": [
+    "crud",
+    "crufd",
+    "wizard",
+    "framework",
+    "free",
+    "restful-api",
+    "url-query-language"
+  ],
+  "prefer-stable": true,
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "psr/log": "^1.0 || ^2.0 || ^3.0"
+  },
+  "require-dev": {
+    "macropay-solutions/php-kernel": "^1.0",
+    "phpunit/phpunit": "^10.5"
+  },
+  "suggest": {
+    "macropay-solutions/php-framework": "dev-production",
+    "macropay-solutions/php-kernel": "dev-production",
+    "macropay-solutions/php-crufd-wizard-generator": "dev-production",
+    "macropay-solutions/php-crufd-wizard-client": "dev-production",
+    "macropay-solutions/php-crufd-wizard-decorator": "dev-production",
+    "ext-pdo_mysql": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "MacropaySolutions\\CrufdWizard\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MacropaySolutions\\CrufdWizard\\Test\\": "tests/"
+    }
+  },
+  "minimum-stability": "RC"
+}
