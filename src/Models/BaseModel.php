@@ -3,17 +3,17 @@
 namespace MacropaySolutions\CrufdWizard\Models;
 
 use Carbon\Carbon;
-use MacropaySolutions\Kernel\Database\Obvious\Builder;
-use MacropaySolutions\Kernel\Database\Obvious\Model;
-use MacropaySolutions\Kernel\Support\Collection;
-use MacropaySolutions\Kernel\Support\Str;
-use MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders\CleverObviousBuilder;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelAttributes;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelFrozenAttributes;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelLazyAttributes;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelLazyRelations;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelRelations;
+use MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders\CleverObviousBuilder;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
+use MacropaySolutions\Kernel\Database\Obvious\Model;
+use MacropaySolutions\Kernel\Support\Collection;
+use MacropaySolutions\Kernel\Support\Str;
 
 /**
  * @property-read ?BaseModelAttributes a manages attributes only. DO NOT STORE THIS IN EXTERNAL VARIABLES!

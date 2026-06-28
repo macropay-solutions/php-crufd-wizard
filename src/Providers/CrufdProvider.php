@@ -2,10 +2,10 @@
 
 namespace MacropaySolutions\CrufdWizard\Providers;
 
-use MacropaySolutions\Kernel\Http\JsonResponse;
-use MacropaySolutions\Kernel\Support\ServiceProvider;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Responses\DecoratableJsonResponse;
+use MacropaySolutions\Kernel\Http\JsonResponse;
+use MacropaySolutions\Kernel\Support\ServiceProvider;
 
 class CrufdProvider extends ServiceProvider
 {

@@ -2,8 +2,8 @@
 
 namespace MacropaySolutions\CrufdWizard\Services;
 
-use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
 
 interface ResourceServiceInterface
 {

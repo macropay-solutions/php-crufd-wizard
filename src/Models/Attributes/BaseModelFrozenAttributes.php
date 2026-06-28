@@ -2,8 +2,8 @@
 
 namespace MacropaySolutions\CrufdWizard\Models\Attributes;
 
-use MacropaySolutions\Kernel\Contracts\Support\Jsonable;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
+use MacropaySolutions\Kernel\Contracts\Support\Jsonable;
 
 /**
  * For properties autocompletion declare in the children classes (with @ property) all the model's parameters (columns)

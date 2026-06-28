@@ -2,13 +2,13 @@
 
 namespace MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders;
 
+use MacropaySolutions\CrufdWizard\Models\BaseModel;
 use MacropaySolutions\Kernel\Contracts\Pagination\CursorPaginator;
 use MacropaySolutions\Kernel\Contracts\Pagination\Paginator;
 use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\Kernel\Pagination\Cursor;
 use MacropaySolutions\Kernel\Pagination\LengthAwarePaginator;
 use MacropaySolutions\Kernel\Support\Collection;
-use MacropaySolutions\CrufdWizard\Models\BaseModel;
 
 class CleverObviousBuilder extends Builder
 {

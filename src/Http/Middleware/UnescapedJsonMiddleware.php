@@ -3,8 +3,8 @@
 namespace MacropaySolutions\CrufdWizard\Http\Middleware;
 
 use Closure;
-use MacropaySolutions\Kernel\Http\Request;
 use MacropaySolutions\CrufdWizard\Providers\CrufdProvider;
+use MacropaySolutions\Kernel\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
