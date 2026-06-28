@@ -2,15 +2,15 @@
 
 namespace MacropaySolutions\CrufdWizard\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\CursorPaginator;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Validation\ValidationException;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
+use MacropaySolutions\Kernel\Database\Obvious\ModelNotFoundException;
+use MacropaySolutions\Kernel\Database\Obvious\Relations\Relation;
+use MacropaySolutions\Kernel\Http\JsonResponse;
+use MacropaySolutions\Kernel\Http\Request;
+use MacropaySolutions\Kernel\Pagination\CursorPaginator;
+use MacropaySolutions\Kernel\Pagination\LengthAwarePaginator;
+use MacropaySolutions\Kernel\Pagination\Paginator;
+use MacropaySolutions\Kernel\Validation\ValidationException;
 use MacropaySolutions\CrufdWizard\Exceptions\CrudValidationException;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Helpers\ResourceHelper;

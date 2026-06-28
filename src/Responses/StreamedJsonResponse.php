@@ -2,8 +2,8 @@
 
 namespace MacropaySolutions\CrufdWizard\Responses;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
+use MacropaySolutions\Kernel\Contracts\Support\Arrayable;
+use MacropaySolutions\Kernel\Contracts\Support\Jsonable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

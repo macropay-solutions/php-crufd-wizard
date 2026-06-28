@@ -2,7 +2,7 @@
 
 namespace MacropaySolutions\CrufdWizard\Responses;
 
-use Illuminate\Http\JsonResponse;
+use MacropaySolutions\Kernel\Http\JsonResponse;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 
 class DecoratableJsonResponse extends JsonResponse

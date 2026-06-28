@@ -2,7 +2,7 @@
 
 namespace MacropaySolutions\CrufdWizard\Models\Attributes;
 
-use Illuminate\Contracts\Support\Jsonable;
+use MacropaySolutions\Kernel\Contracts\Support\Jsonable;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
 
 /**

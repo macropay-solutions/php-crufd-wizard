@@ -2,7 +2,7 @@
 
 namespace MacropaySolutions\CrufdWizard\Services;
 
-use Illuminate\Database\Eloquent\Builder;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
 

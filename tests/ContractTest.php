@@ -2,15 +2,15 @@
 
 namespace MacropaySolutions\CrufdWizard\Test;
 
-use Illuminate\Container\Container;
-use Illuminate\Database\Connection;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\CursorPaginator;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
+use MacropaySolutions\Kernel\Container\Container;
+use MacropaySolutions\Kernel\Database\Connection;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
+use MacropaySolutions\Kernel\Database\Obvious\Relations\Relation;
+use MacropaySolutions\Kernel\Http\JsonResponse;
+use MacropaySolutions\Kernel\Http\Request;
+use MacropaySolutions\Kernel\Pagination\CursorPaginator;
+use MacropaySolutions\Kernel\Pagination\LengthAwarePaginator;
+use MacropaySolutions\Kernel\Pagination\Paginator;
 use MacropaySolutions\CrufdWizard\Http\Controllers\ResourceControllerTrait;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
 use MacropaySolutions\CrufdWizard\Services\BaseResourceService;
@@ -108,7 +108,7 @@ class ContractTest extends TestCase
                             ];
                             protected $table = 'test';
 
-                            protected function newBaseQueryBuilder(): \Illuminate\Database\Query\Builder
+                            protected function newBaseQueryBuilder(): \MacropaySolutions\Kernel\Database\Query\Builder
                             {
                                 return (new Connection(new \PDO('sqlite::memory:')))->query();
                             }

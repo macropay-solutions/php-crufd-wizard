@@ -40,7 +40,7 @@ With the free version, you can instantly pull resources, load their relationship
 * *Example (Free):* `GET /operations?currency=EUR&withRelationsCount[]=products` (Get all operations where currency exactly equals EUR and include the count of related products).
 
 #### The Pro Advantage
-When your data logic gets complex, the paid version of RetrieveQL replaces hundreds of lines of Eloquent sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
+When your data logic gets complex, the paid version of RetrieveQL replaces hundreds of lines of Obvious sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
 * *Example (Pro):* `GET /operations?currency[in][]=EUR&currency[in][]=USD&withSum=value` (Get operations where currency is IN [EUR, USD] and include the total sum of their values).
 
 ## Url query language lib for RESTful CRUD (micro) services
@@ -252,7 +252,7 @@ OBS
 
 Set `$returnNullOnInvalidColumnAttributeAccess = false;` in model if you want exception instead of null on accessing invalid model attributes or invalid relations (It also needs error_reporting = E_ALL in php ini file).
 
-Set `LIST_UN_HYDRATED_WHEN_POSSIBLE = true` in model if you want to skip eloquent hydration for list db query results; note that setting this to true will not append the primary_key_identifier on response. Also if you use casts or any logic that alters (conditionally or not) the attributes of the model, you should leave LIST_UN_HYDRATED_WHEN_POSSIBLE as false.
+Set `LIST_UN_HYDRATED_WHEN_POSSIBLE = true` in model if you want to skip obvious hydration for list db query results; note that setting this to true will not append the primary_key_identifier on response. Also if you use casts or any logic that alters (conditionally or not) the attributes of the model, you should leave LIST_UN_HYDRATED_WHEN_POSSIBLE as false.
 
 Set LIVE_MODE=false in your .env file for non prod environments.
 
@@ -474,7 +474,7 @@ Obs.
 
     index_required_on_filtering key CAN'T be used for filtering.
     use ?cursor= for cursor pagination and ?simplePaginate=1 for simplePaginate. Use none of them for length aware paginator.
-    if \Illuminate\Http\Middleware\ConvertEmptyStringsToNull::class is used use ?cursor=1 instead of emtpy string
+    if \MacropaySolutions\Kernel\Http\Middleware\ConvertEmptyStringsToNull::class is used use ?cursor=1 instead of emtpy string
     sort works also on aggregated colums for relation count and existence 
     withRelations which uses with function does not load morphable relations. BaseResourceService::addRelationsToExistingModel can be used for those or loadMorph.
 

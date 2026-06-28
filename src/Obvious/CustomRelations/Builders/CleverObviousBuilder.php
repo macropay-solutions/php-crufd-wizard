@@ -1,16 +1,16 @@
 <?php
 
-namespace MacropaySolutions\CrufdWizard\Eloquent\CustomRelations\Builders;
+namespace MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders;
 
-use Illuminate\Contracts\Pagination\CursorPaginator;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\Cursor;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+use MacropaySolutions\Kernel\Contracts\Pagination\CursorPaginator;
+use MacropaySolutions\Kernel\Contracts\Pagination\Paginator;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
+use MacropaySolutions\Kernel\Pagination\Cursor;
+use MacropaySolutions\Kernel\Pagination\LengthAwarePaginator;
+use MacropaySolutions\Kernel\Support\Collection;
 use MacropaySolutions\CrufdWizard\Models\BaseModel;
 
-class CleverEloquentBuilder extends Builder
+class CleverObviousBuilder extends Builder
 {
     protected bool $getUnHydrated = false;
 
@@ -76,7 +76,7 @@ class CleverEloquentBuilder extends Builder
     /**
      * @inheritdoc
      */
-    public function get($columns = ['*']): \Illuminate\Database\Eloquent\Collection|array|Collection
+    public function get($columns = ['*']): \MacropaySolutions\Kernel\Database\Obvious\Collection|array|Collection
     {
         return $this->getUnHydrated ? $this->getUnHydrated($columns) : parent::get($columns);
     }

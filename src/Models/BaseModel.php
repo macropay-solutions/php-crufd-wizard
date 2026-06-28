@@ -3,11 +3,11 @@
 namespace MacropaySolutions\CrufdWizard\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use MacropaySolutions\CrufdWizard\Eloquent\CustomRelations\Builders\CleverEloquentBuilder;
+use MacropaySolutions\Kernel\Database\Obvious\Builder;
+use MacropaySolutions\Kernel\Database\Obvious\Model;
+use MacropaySolutions\Kernel\Support\Collection;
+use MacropaySolutions\Kernel\Support\Str;
+use MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders\CleverObviousBuilder;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelAttributes;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelFrozenAttributes;
@@ -75,9 +75,9 @@ abstract class BaseModel extends Model
     /**
      * @inheritDoc
      */
-    public function newEloquentBuilder($query): Builder
+    public function newObviousBuilder($query): Builder
     {
-        return new CleverEloquentBuilder($query);
+        return new CleverObviousBuilder($query);
     }
 
     public function getColumns(bool $includingPrimary = true): array

@@ -2,7 +2,7 @@
 
 namespace MacropaySolutions\CrufdWizard\Models\Attributes;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
+use MacropaySolutions\Kernel\Database\Obvious\Relations\Relation;
 
 /**
  * For properties autocompletion declare in the children classes (with @ property-read) all the model's relations

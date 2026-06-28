@@ -2,9 +2,9 @@
 
 namespace MacropaySolutions\CrufdWizard\Helpers;
 
-use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Str;
+use MacropaySolutions\Kernel\Container\Container;
+use MacropaySolutions\Kernel\Database\Obvious\ModelNotFoundException;
+use MacropaySolutions\Kernel\Support\Str;
 
 class GeneralHelper
 {
@@ -44,7 +44,7 @@ class GeneralHelper
 
     /**
      * @return \Closure|Container|mixed|object|null
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \MacropaySolutions\Kernel\Contracts\Container\BindingResolutionException
      */
     public static function app(mixed $abstract = null, array $parameters = []): mixed
     {

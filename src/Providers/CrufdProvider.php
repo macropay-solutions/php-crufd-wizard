@@ -2,8 +2,8 @@
 
 namespace MacropaySolutions\CrufdWizard\Providers;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\ServiceProvider;
+use MacropaySolutions\Kernel\Http\JsonResponse;
+use MacropaySolutions\Kernel\Support\ServiceProvider;
 use MacropaySolutions\CrufdWizard\Helpers\GeneralHelper;
 use MacropaySolutions\CrufdWizard\Responses\DecoratableJsonResponse;
 
