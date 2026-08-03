@@ -10,13 +10,13 @@ use MacropaySolutions\CrufdWizard\Services\ResourceServiceInterface;
 use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\Kernel\Database\Obvious\ModelNotFoundException;
 use MacropaySolutions\Kernel\Database\Obvious\Relations\Relation;
+use MacropaySolutions\Kernel\Http\Base\Response;
 use MacropaySolutions\Kernel\Http\JsonResponse;
 use MacropaySolutions\Kernel\Http\Request;
 use MacropaySolutions\Kernel\Pagination\CursorPaginator;
 use MacropaySolutions\Kernel\Pagination\LengthAwarePaginator;
 use MacropaySolutions\Kernel\Pagination\Paginator;
 use MacropaySolutions\Kernel\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Call $this->>init() on the constructor where this trait is used

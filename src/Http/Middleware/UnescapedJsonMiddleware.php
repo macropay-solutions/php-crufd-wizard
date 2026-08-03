@@ -4,8 +4,8 @@ namespace MacropaySolutions\CrufdWizard\Http\Middleware;
 
 use Closure;
 use MacropaySolutions\CrufdWizard\Providers\CrufdProvider;
+use MacropaySolutions\Kernel\Http\Base\JsonResponse;
 use MacropaySolutions\Kernel\Http\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * This will decode and encode again the response.
