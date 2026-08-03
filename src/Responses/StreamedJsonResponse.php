@@ -4,8 +4,8 @@ namespace MacropaySolutions\CrufdWizard\Responses;
 
 use MacropaySolutions\Kernel\Contracts\Support\Arrayable;
 use MacropaySolutions\Kernel\Contracts\Support\Jsonable;
-use MacropaySolutions\Kernel\Http\Base\JsonResponse;
-use MacropaySolutions\Kernel\Http\Base\StreamedResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * StreamedJsonResponse represents a streamed HTTP response for JSONs
