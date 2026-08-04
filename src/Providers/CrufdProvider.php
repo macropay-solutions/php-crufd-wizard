@@ -66,18 +66,4 @@ class CrufdProvider extends ServiceProvider
             );
         });
     }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../../config/crufd_wizard.php' => \function_exists('config_path') ?
-                    \config_path('crufd_wizard.php') :
-                    \base_path('config/crufd_wizard.php')
-            ], 'config');
-        }
-    }
 }

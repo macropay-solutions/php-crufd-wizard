@@ -80,6 +80,8 @@ Look at
 
 `\MacropaySolutions\CrufdWizard\Providers\CrufdProvider`. Its logic is already in PHP Framework registerExplicitBindingsMap and config.
 
+Copy `./config/crufd_wizard.php` into your project config folder and call `$app-configure('crufd_wizard');` in `bootstrap/app.php`
+
 
 Create a constant in your code
 
