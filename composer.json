@@ -41,5 +41,10 @@
       "MacropaySolutions\\CrufdWizard\\Test\\": "tests/"
     }
   },
+  "extra": {
+    "publish-assets": {
+      "config/crufd_wizard.php": "config/crufd_wizard.php"
+    }
+  },
   "minimum-stability": "RC"
 }
