@@ -57,9 +57,7 @@ class ContractTest extends TestCase
         });
 
         $app->bind('events', function () use ($app) {
-            return class_exists(\MacropaySolutions\Kernel\Events\NullDispatcher::class)
-                ? new \MacropaySolutions\Kernel\Events\NullDispatcher()
-                : new \MacropaySolutions\Kernel\Events\Dispatcher($app);
+            return new \MacropaySolutions\Kernel\Events\Dispatcher($app);
         });
 
         $app->bind('request', function () {
