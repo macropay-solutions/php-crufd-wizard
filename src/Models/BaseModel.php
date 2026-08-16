@@ -185,21 +185,26 @@ abstract class BaseModel extends Model
     public static function boot(): void
     {
         parent::boot();
-        static::creating(function (BaseModel $baseModel): void {
-            $baseModel->setCreatedAt(Carbon::now()->format($baseModel::CREATED_AT_FORMAT));
-        });
+        static::creating([static::class, 'handleCreatingEvent']);
+        static::updating([static::class, 'handleUpdatingEvent']);
+    }
 
-        static::updating(function (BaseModel $baseModel): void {
-            $updatedAtColumn = $baseModel->getUpdatedAtColumn();
+    public static function handleCreatingEvent(BaseModel $baseModel): void
+    {
+        $baseModel->setCreatedAt(Carbon::now()->format($baseModel::CREATED_AT_FORMAT));
+    }
 
-            if ('' === $baseModel->getAttribute($updatedAtColumn)) {
-                $baseModel->setUpdatedAt($baseModel->getOriginal($updatedAtColumn));
+    public static function handleUpdatingEvent(BaseModel $baseModel): void
+    {
+        $updatedAtColumn = $baseModel->getUpdatedAtColumn();
 
-                return;
-            }
+        if ('' === $baseModel->getAttribute($updatedAtColumn)) {
+            $baseModel->setUpdatedAt($baseModel->getOriginal($updatedAtColumn));
 
-            $baseModel->setUpdatedAt(Carbon::now()->format($baseModel::UPDATED_AT_FORMAT));
-        });
+            return;
+        }
+
+        $baseModel->setUpdatedAt(Carbon::now()->format($baseModel::UPDATED_AT_FORMAT));
     }
 
     /**
@@ -247,7 +252,7 @@ abstract class BaseModel extends Model
                     'pgsql' => "SELECT
                             array_position(ix.indkey, a.attnum) + 1 as Seq_in_index,
                             i.relname as Key_name,
-                            a.attname as Column_names
+                            a.attname as Column_name
                         from
                             pg_class t,
                             pg_class i,
