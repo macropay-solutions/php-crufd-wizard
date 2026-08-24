@@ -23,15 +23,12 @@ abstract class BaseModel extends Model
 {
     public const RESOURCE_NAME = null;
     public const WITH_RELATIONS = [];
-    public const CREATED_AT_FORMAT = 'Y-m-d H:i:s';
-    public const UPDATED_AT_FORMAT = 'Y-m-d H:i:s';
     public const COMPOSITE_PK_SEPARATOR = '_';
     /**
      * Setting this to true will not append the primary_key_identifier on response
      * Leave it false if you use casts or any logic that alters (conditionally or not) the attributes of the model
      */
     public const LIST_UN_HYDRATED_WHEN_POSSIBLE = false;
-    public $timestamps = false;
     public static $snakeAttributes = false;
     public static ?string $baseModelAttributesFqn = null;
     public static ?string $baseModelRelationsFqn = null;
@@ -182,26 +179,6 @@ abstract class BaseModel extends Model
         return parent::setAttribute($key, $value);
     }
 
-    public static function boot(): void
-    {
-        parent::boot();
-        static::creating(function (BaseModel $baseModel): void {
-            $baseModel->setCreatedAt(Carbon::now()->format($baseModel::CREATED_AT_FORMAT));
-        });
-
-        static::updating(function (BaseModel $baseModel): void {
-            $updatedAtColumn = $baseModel->getUpdatedAtColumn();
-
-            if ('' === $baseModel->getAttribute($updatedAtColumn)) {
-                $baseModel->setUpdatedAt($baseModel->getOriginal($updatedAtColumn));
-
-                return;
-            }
-
-            $baseModel->setUpdatedAt(Carbon::now()->format($baseModel::UPDATED_AT_FORMAT));
-        });
-    }
-
     /**
      * @throws \Exception
      */
@@ -247,7 +224,7 @@ abstract class BaseModel extends Model
                     'pgsql' => "SELECT
                             array_position(ix.indkey, a.attnum) + 1 as Seq_in_index,
                             i.relname as Key_name,
-                            a.attname as Column_names
+                            a.attname as Column_name
                         from
                             pg_class t,
                             pg_class i,
