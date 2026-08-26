@@ -476,8 +476,7 @@ Obs.
     index_required_on_filtering key CAN'T be used for filtering.
     use ?cursor= for cursor pagination and ?simplePaginate=1 for simplePaginate. Use none of them for length aware paginator.
     if \MacropaySolutions\Kernel\Http\Middleware\ConvertEmptyStringsToNull::class is used use ?cursor=1 instead of emtpy string
-    sort works also on aggregated colums for relation count and existence 
-    withRelations which uses with function does not load morphable relations. BaseResourceService::addRelationsToExistingModel can be used for those or loadMorph.
+    sort works also on aggregated colums for relation count and existence
 
 
 #### III.4 Update resource (or create)
