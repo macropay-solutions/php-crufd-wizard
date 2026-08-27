@@ -472,7 +472,7 @@ abstract class BaseModel extends Model
         $map = [];
 
         foreach (static::WITH_RELATIONS as $relation) {
-            $map[$relation] = \Closure::fromCallable([$this, $relation]);
+            $map[$relation] = fn(...$args): mixed => $this->$relation(...$args);
         }
 
         return $map;
@@ -502,20 +502,5 @@ abstract class BaseModel extends Model
         }
 
         return $this->getAttribute($key);
-    }
-
-    public function __sleep()
-    {
-        $this->A = null;
-        $this->R = null;
-
-        return parent::__sleep();
-    }
-
-    public function __wakeup()
-    {
-        $this->A = null;
-        $this->R = null;
-        parent::__wakeup();
     }
 }
