@@ -8,6 +8,18 @@ use MacropaySolutions\Kernel\Database\Obvious\Builder;
 
 abstract class BaseResourceService implements ResourceServiceInterface
 {
+    public const RESERVED_WORDS = [
+        'page',
+        'limit',
+        'cursor',
+        'simplePaginate',
+        'sort',
+        'sqlDebug',
+        'logError',
+        'withRelations',
+        'withRelationsCount',
+        'withRelationsExistence',
+    ];
     public const COUNT_ALIAS_POSTFIX = '_count';
     public const EXIST_ALIAS_POSTFIX = '_exist';
     protected BaseModel $model;
@@ -67,7 +79,7 @@ abstract class BaseResourceService implements ResourceServiceInterface
     public function list(array $request): Builder
     {
         $builder = $this->model::query();
-        $filters = GeneralHelper::filterDataByKeys($request, $possibleSortColumns = $this->model->getColumns());
+        $filters = $this->getValidResourceFilters($request, $possibleSortColumns = $this->model->getColumns());
 
         if ($this->model->isIndexRequiredOnFiltering()) {
             $possibleSortColumns = $this->model->getIndexedColumns();
@@ -246,5 +258,27 @@ abstract class BaseResourceService implements ResourceServiceInterface
     protected function getValidRelations(array $relations): array
     {
         return \array_values(\array_intersect($this->model::WITH_RELATIONS, $relations));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function getValidResourceFilters(array $request, array $columns): array
+    {
+        $requestWithoutReservedWords = \array_diff_key($request, \array_flip(static::RESERVED_WORDS));
+        $validResourceFilters = GeneralHelper::filterDataByKeys($requestWithoutReservedWords, $columns);
+
+        if (
+            $requestWithoutReservedWords !== []
+            && $validResourceFilters !== $requestWithoutReservedWords
+        ) {
+            throw new \Exception('Invalid filters used for ' . $this->model::class . ': ' .
+                \implode(', ', \array_keys(\array_diff_key(
+                    $requestWithoutReservedWords,
+                    $validResourceFilters
+                ))));
+        }
+
+        return $validResourceFilters;
     }
 }

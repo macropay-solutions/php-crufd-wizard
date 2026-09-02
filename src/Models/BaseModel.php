@@ -10,6 +10,7 @@ use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelLazyAttributes;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelLazyRelations;
 use MacropaySolutions\CrufdWizard\Models\Attributes\BaseModelRelations;
 use MacropaySolutions\CrufdWizard\Obvious\CustomRelations\Builders\CleverObviousBuilder;
+use MacropaySolutions\CrufdWizard\Services\BaseResourceService;
 use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\Kernel\Database\Obvious\Model;
 use MacropaySolutions\Kernel\Support\Collection;
@@ -95,10 +96,7 @@ abstract class BaseModel extends Model
 
         if (
             !\app()->environment('production')
-            && [] !== ($reservedUsed = \array_intersect(
-                ['page', 'limit', 'cursor', 'simplePaginate', 'sort', 'sqlDebug', 'logError'],
-                $columns
-            ))
+            && [] !== ($reservedUsed = \array_intersect(BaseResourceService::RESERVED_WORDS, $columns))
         ) {
             \app('log')->warning('CrufdWizard warning: the resource ' . $this::resourceName() .
                 ' uses reserved words as columns: ' . \implode(',', $reservedUsed));
