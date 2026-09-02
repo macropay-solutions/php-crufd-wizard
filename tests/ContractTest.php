@@ -122,14 +122,14 @@ class ContractTest extends TestCase
             }
         };
 
-        $request = new Request([
+        // 1. Assert invalid request (column3) is aborted and returns empty
+        $invalidRequest = new Request([
             'column1' => 5,
             'column2' => 3,
             'column3' => 3,
-            'sort' => [['by' => 'column2'], ['by' => 'column1', 'dir' => 'ASC'], ['by' => 'column3', 'dir' => 'ASC']],
             'limit' => 50,
         ]);
-        self::assertInstanceOf(JsonResponse::class, $response = $controller->list($request));
+        self::assertInstanceOf(JsonResponse::class, $response = $controller->list($invalidRequest));
         self::assertEquals([
             'has_more_pages' => false,
             'sums' => [],
@@ -144,6 +144,18 @@ class ContractTest extends TestCase
             'to' => null,
             'total' => 0
         ], $response->getData(true));
+
+        // Ensure the query was never built
+        self::assertNull(static::$sql);
+
+        // 2. Assert valid request successfully builds SQL
+        $validRequest = new Request([
+            'column1' => 5,
+            'column2' => 3,
+            'sort' => [['by' => 'column2'], ['by' => 'column1', 'dir' => 'ASC']],
+            'limit' => 50,
+        ]);
+        $controller->list($validRequest);
 
         self::assertEquals(
             'select * from "test" where "column1" = ? and "column2" = ? order by "column2" desc, "column1" asc',
