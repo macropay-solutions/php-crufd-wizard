@@ -33,17 +33,6 @@ abstract class BaseModel extends Model
     public static $snakeAttributes = false;
     public static ?string $baseModelAttributesFqn = null;
     public static ?string $baseModelRelationsFqn = null;
-
-    /**
-     * Cache for a (manages attributes/columns)
-     */
-    private ?BaseModelAttributes $A = null;
-
-    /**
-     * Cache for r (manages relations)
-     */
-    private ?BaseModelRelations $R = null;
-
     protected bool $returnNullOnInvalidColumnAttributeAccess = true;
     protected array $ignoreUpdateFor = [];
     protected array $ignoreExternalCreateFor = [];
