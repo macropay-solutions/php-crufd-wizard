@@ -491,11 +491,11 @@ abstract class BaseModel extends Model
      */
     public function __get($key)
     {
-        if ($key === 'r' || $key === 'R') {
+        if ($key === 'r') {
             return $this->R ??= BaseModelLazyRelations::getAbstractBaseModelAttributes(\WeakReference::create($this));
         }
 
-        if ($key === 'a' || $key === 'A') {
+        if ($key === 'a') {
             return $this->A ??= BaseModelLazyAttributes::getAbstractBaseModelAttributes(\WeakReference::create($this));
         }
 
