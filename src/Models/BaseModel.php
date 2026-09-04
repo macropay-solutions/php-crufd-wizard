@@ -30,7 +30,6 @@ abstract class BaseModel extends Model
      * Leave it false if you use casts or any logic that alters (conditionally or not) the attributes of the model
      */
     public const LIST_UN_HYDRATED_WHEN_POSSIBLE = false;
-    public static $snakeAttributes = false;
     public static ?string $baseModelAttributesFqn = null;
     public static ?string $baseModelRelationsFqn = null;
     protected bool $returnNullOnInvalidColumnAttributeAccess = true;
@@ -38,7 +37,7 @@ abstract class BaseModel extends Model
     protected array $ignoreExternalCreateFor = [];
     protected array $allowNonExternalUpdatesFor = [];
     protected bool $indexRequiredOnFiltering = true;
-    protected $hidden = [
+    protected array $hidden = [
         'framework_through_key'
     ];
 
@@ -142,7 +141,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritDoc
      */
-    public function setAttribute(mixed $key, mixed $value): mixed
+    public function setAttribute(mixed $key, mixed $value): static
     {
         if (!$this->exists) {
             return parent::setAttribute($key, $value);
@@ -183,7 +182,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritdoc
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->getPrimaryKeyIdentifierAttribute();
     }
@@ -288,7 +287,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritDoc
      */
-    protected function setKeysForSelectQuery($query)
+    protected function setKeysForSelectQuery($query): Builder
     {
         return $this->setKeysForSaveQuery($query);
     }
@@ -296,7 +295,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritDoc
      */
-    protected function setKeysForSaveQuery($query)
+    protected function setKeysForSaveQuery($query): Builder
     {
         return $query->where($this->getPrimaryKeyFilter());
     }
@@ -478,7 +477,7 @@ abstract class BaseModel extends Model
      * @param string $key
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key): mixed
     {
         if ($key === 'r') {
             return $this->R ??= BaseModelLazyRelations::getAbstractBaseModelAttributes(\WeakReference::create($this));
