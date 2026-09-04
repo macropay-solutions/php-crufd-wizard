@@ -106,11 +106,11 @@ class ContractTest extends TestCase
                     {
                         $this->model = new class () extends BaseModel {
                             protected bool $indexRequiredOnFiltering = false;
-                            protected $fillable = [
+                            protected array $fillable = [
                                 'column1',
                                 'column2',
                             ];
-                            protected $table = 'test';
+                            protected string $table = 'test';
 
                             protected function newBaseQueryBuilder(): \MacropaySolutions\Kernel\Database\Query\Builder
                             {
