@@ -32,7 +32,7 @@ abstract class BaseModel extends Model
     public const LIST_UN_HYDRATED_WHEN_POSSIBLE = false;
     public static ?string $baseModelAttributesFqn = null;
     public static ?string $baseModelRelationsFqn = null;
-    protected bool $returnNullOnInvalidColumnAttributeAccess = true;
+    protected bool $returnNullOnInvalidColumnAttributeAccess = false;
     protected array $ignoreUpdateFor = [];
     protected array $ignoreExternalCreateFor = [];
     protected array $allowNonExternalUpdatesFor = [];
