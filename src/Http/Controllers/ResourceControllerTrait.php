@@ -115,7 +115,7 @@ trait ResourceControllerTrait
 
             foreach ($countRelations as $relationName) {
                 $result[$relationName . $this->resourceService::COUNT_ALIAS_POSTFIX] ??=
-                    $baseModel->{$relationName}()->count();
+                    $baseModel->callSegregatedRelation($relationName)->count();
             }
 
             foreach (
@@ -126,7 +126,7 @@ trait ResourceControllerTrait
                 ] ??= \in_array($relationName, $countRelations, true) &&
                     \is_int($result[$relationName . $this->resourceService::COUNT_ALIAS_POSTFIX] ?? null) ?
                     $result[$relationName . $this->resourceService::COUNT_ALIAS_POSTFIX] > 0 :
-                    $baseModel->{$relationName}()->exists();
+                    $baseModel->callSegregatedRelation($relationName)->exists();
             }
 
             return GeneralHelper::app(JsonResponse::class, [
@@ -516,7 +516,7 @@ trait ResourceControllerTrait
     ): BaseModel {
         $this->validateRelation($relation);
         /** @var Relation $relationInstance */
-        $relationInstance = $this->resourceService->get($identifier, appendIndex: false)->{$relation}();
+        $relationInstance = $this->resourceService->get($identifier, appendIndex: false)->callSegregatedRelation($relation);
         /** @var BaseModel $related */
         $related = $relationInstance->getRelated();
         $exploded = \explode($related::COMPOSITE_PK_SEPARATOR, $relatedIdentifier);

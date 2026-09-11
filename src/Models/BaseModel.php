@@ -426,13 +426,23 @@ abstract class BaseModel extends Model
             return $this->newQueryWithoutRelationships()->{$method}($column, $amount, $extra);
         }
 
-        $this->{$column} = $this->isClassDeviable($column)
-            ? $this->deviateClassCastableAttribute($method, $column, $amount)
-            : (\extension_loaded('bcmath') ? \bcadd(
-                $s1 = (string)$this->{$column},
-                $s2 = (string)($method === 'increment' ? $amount : $amount * -1),
-                \max(\strlen(\strrchr($s1, '.') ?: ''), \strlen(\strrchr($s2, '.') ?: ''))
-            ) : $this->{$column} + ($method === 'increment' ? $amount : $amount * -1));
+        $this->setAttribute($column, \bcadd(
+            $s1 = (string)$this->{$column},
+            $s2 = (string)(
+            $method === 'increment'
+                ? $amount
+                : \bcmul(
+                (string)$amount,
+                '-1',
+                $p = \max(0, \strlen((string)\strrchr((string)$amount, '.')) - 1)
+            )
+            ),
+            \max(
+                0,
+                \strlen((string)\strrchr($s1, '.')) - 1,
+                $p ?? \strlen((string)\strrchr($s2, '.')) - 1
+            )
+        ));
 
         $this->forceFill($extra);
 

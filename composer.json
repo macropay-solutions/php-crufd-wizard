@@ -17,7 +17,8 @@
     "php": "^8.2",
     "ext-json": "*",
     "ext-pdo": "*",
-    "psr/log": "^1.0 || ^2.0 || ^3.0"
+    "psr/log": "^1.0 || ^2.0 || ^3.0",
+    "ext-bcmath": "*"
   },
   "require-dev": {
     "macropay-solutions/php-kernel": "^1.0",
