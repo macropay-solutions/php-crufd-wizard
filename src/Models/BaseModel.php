@@ -463,7 +463,7 @@ abstract class BaseModel extends Model
         );
     }
 
-    protected function segregatedRelationsDefinitionMap(): array
+    protected static function segregatedRelationsDefinitionMap(): array
     {
         $map = [];
 
