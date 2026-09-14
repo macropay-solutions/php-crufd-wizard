@@ -96,7 +96,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritdoc
      */
-    protected function segregatedAccessorsMap(): array
+    protected static function segregatedAccessorsMap(): array
     {
         return [
             'index_required_on_filtering' => fn(): array => $this->getIndexRequiredOnFilteringAttribute(),
