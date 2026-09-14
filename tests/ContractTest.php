@@ -33,36 +33,36 @@ class ContractTest extends TestCase
             }
         };
 
-        $app->bind('log', function () {
+        $app->bind('log', [function () {
             return new class () {
                 public function warning(string $message): void {}
                 public function error(string $message): void {}
             };
-        });
+        }, '__invoke']);
 
-        $app->bind('cache.store', function () {
+        $app->bind('cache.store', [function () {
             return new class () {
                 public function remember(string $key, $ttl, \Closure $callback): mixed {
                     return $callback();
                 }
             };
-        });
+        }, '__invoke']);
 
-        $app->bind('translator', function () {
+        $app->bind('translator', [function () {
             return new class () {
                 public function get(string $key): string { return $key; }
                 public function trans(string $key): string { return $key; }
                 public function choice(string $key): string { return $key; }
             };
-        });
+        }, '__invoke']);
 
-        $app->bind('events', function () use ($app) {
+        $app->bind('events', [function () use ($app) {
             return new \MacropaySolutions\Kernel\Events\Dispatcher($app);
-        });
+        }, '__invoke']);
 
-        $app->bind('request', function () {
+        $app->bind('request', [function () {
             return Request::create('/');
-        });
+        }, '__invoke']);
 
         Container::setInstance($app);
     }
