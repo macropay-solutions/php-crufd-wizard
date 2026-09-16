@@ -204,7 +204,7 @@ abstract class BaseModel extends Model
              */
             function () use ($driver): array {
                 $tableName = $this->getConnection()->getTablePrefix() . $this->getTable();
-                return $this->getConnection()->select([
+                return \array_map(fn($row) => (array)$row, $this->getConnection()->select([
                     'mariadb' => 'SHOW INDEX FROM ' . $tableName,
                     'mysql' => 'SHOW INDEX FROM ' . $tableName,
                     'pgsql' => "SELECT
@@ -223,7 +223,7 @@ abstract class BaseModel extends Model
                             and a.attnum = any(ix.indkey)
                             and t.relkind = 'r'
                             and t.relname = '" . $tableName . "'",
-                ][$driver]);
+                ][$driver]));
             };
 
         try {
