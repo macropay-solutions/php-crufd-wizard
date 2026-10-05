@@ -270,7 +270,7 @@ abstract class BaseResourceService implements ResourceServiceInterface
 
         if (
             $requestWithoutReservedWords !== []
-            && $validResourceFilters !== $requestWithoutReservedWords
+            && \count($validResourceFilters) !== \count($requestWithoutReservedWords)
         ) {
             throw new \Exception('Invalid filters used for ' . $this->model::class . ': ' .
                 \implode(', ', \array_keys(\array_diff_key(
