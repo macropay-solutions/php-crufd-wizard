@@ -11,7 +11,6 @@
     "restful-api",
     "url-query-language"
   ],
-  "prefer-stable": true,
   "license": "MIT",
   "require": {
     "php": "^8.2",
@@ -47,5 +46,6 @@
       "config/crufd_wizard.php": "config/crufd_wizard.php"
     }
   },
-  "minimum-stability": "RC"
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
