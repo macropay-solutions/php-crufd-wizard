@@ -8,7 +8,7 @@
 
 ## Features: Freemium vs Pro High Level Comparison
 
-| Feature / Operation | CrufdQL Freemium (`php-crufd-wizard`)                       | CruxdQL Pro (`php-cruxd-wizard`)                                                                                                                                      |
+| Feature / Operation | CrufdQL Freemium (`php-crufd-wizard`)                       | CrufadQL Pro (`php-crufad-wizard`)                                                                                                                                    |
 | :--- |:------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Data Engine Support** | ✅ SQL Databases Only                                              | ✅ SQL + **Elasticsearch (via SQL Driver)**                                                                                                                            |
 | **Create Resource** | ✅ Standard Create                                                 | ✅ Standard Create                                                                                                                                                     |
@@ -40,7 +40,7 @@ With the free version, you can instantly pull resources, load their relationship
 * *Example (Free):* `GET /operations?currency=EUR&withRelationsCount[]=products` (Get all operations where currency exactly equals EUR and include the count of related products).
 
 #### The Pro Advantage
-When your data logic gets complex, the paid version of CruXdQL replaces hundreds of lines of Obvious sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
+When your data logic gets complex, the paid version of CrufadQL replaces hundreds of lines of Obvious sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
 * *Example (Pro):* `GET /operations?currency[in][]=EUR&currency[in][]=USD&withSum=value` (Get operations where currency is IN [EUR, USD] and include the total sum of their values).
 
 ## Url query language lib for RESTful CRUD (micro) services
