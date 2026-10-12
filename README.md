@@ -8,30 +8,30 @@
 
 ## Features: Freemium vs Pro High Level Comparison
 
-| Feature / Operation | CrufdQL Freemium (`php-crufd-wizard`)                       | WizardQL Pro (`php-rest-wizard`) |
-| :--- |:------------------------------------------------------------------| :--- |
-| **Data Engine Support** | ✅ SQL Databases Only                                              | ✅ SQL + **Elasticsearch (via SQL Driver)** |
-| **Create Resource** | ✅ Standard Create                                                 | ✅ Standard Create |
-| **Read / Get Resource** | ✅ Single retrieve with relations                                  | ✅ Single retrieve with relations |
-| **Update Resource** | ✅ Standard Update                                                 | ✅ Update, **Upsert**, & **Incrementing** (`++x.xx`) |
-| **Delete Resource** | ✅ Standard Delete                                                 | ✅ Standard Delete |
-| **Bulk Delete Resource** | ❌                                                                 | ✅ Via `list({filters})->delete()` |
-| **List Resource** | ✅ Standard List                                                   | ✅ Standard List |
-| **List Relation as Resource** | ❌                                                                 | ✅ (e.g., `GET /{resource}/{pk}/{relation}?`) |
-| **Composite Primary Key** | ✅ Supported (e.g., `12_35`)                                       | ✅ Supported (e.g., `12_35`) |
-| **Default Filtering (`=`)** | ✅ **Strict Match** (Exact equality)                               | ✅ **Starts With** (Prefix match by default) |
-| **Advanced Filters** | ✅ `from`, `to`                                                     | ✅ `equals`, `in`, `not in`, `from`, `to`, `contains`, `notContains`, `is null`, `is not null` |
-| **Response Formats** | ✅ JSON                                                            | ✅ JSON, **JSONL** (`limit=-1`), **StreamedJsonResponse** |
-| **Pagination** | ✅ LengthAware, Simple, Cursor                                     | ✅ All Free + `limit=0` (Count only) |
-| **Sorting** | ✅ Multi-column sorting                                            | ✅ Multi-column & **Aggregate Sorting** |
-| **Relational Loading** | ✅ `withRelations`, `withRelationsCount`, `withRelationsExistence` | ✅ All Free + `with appends`, `with distinct relations` |
-| **Relation Constraints** | ❌                                                                 | ✅ `has relations`, `doesn't have relations`, `has distinct relations` |
+| Feature / Operation | CrufdQL Freemium (`php-crufd-wizard`)                       | CruxdQL Pro (`php-cruxd-wizard`)                                                                                                                                      |
+| :--- |:------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Data Engine Support** | ✅ SQL Databases Only                                              | ✅ SQL + **Elasticsearch (via SQL Driver)**                                                                                                                            |
+| **Create Resource** | ✅ Standard Create                                                 | ✅ Standard Create                                                                                                                                                     |
+| **Read / Get Resource** | ✅ Single retrieve with relations                                  | ✅ Single retrieve with relations                                                                                                                                      |
+| **Update Resource** | ✅ Standard Update                                                 | ✅ Update, **Upsert**, & **Incrementing** (`++x.xx`)                                                                                                                   |
+| **Delete Resource** | ✅ Standard Delete                                                 | ✅ Standard Delete                                                                                                                                                     |
+| **Bulk Delete Resource** | ❌                                                                 | ✅ Via `list({filters})->delete()`                                                                                                                                     |
+| **List Resource** | ✅ Standard List                                                   | ✅ Standard List                                                                                                                                                       |
+| **List Relation as Resource** | ❌                                                                 | ✅ (e.g., `GET /{resource}/{pk}/{relation}?`)                                                                                                                          |
+| **Composite Primary Key** | ✅ Supported (e.g., `12_35`)                                       | ✅ Supported (e.g., `12_35`)                                                                                                                                           |
+| **Default Filtering (`=`)** | ✅ **Strict Match** (Exact equality)                               | ✅ **Starts With** (Prefix match by default)                                                                                                                           |
+| **Advanced Filters** | ✅ `from`, `to`                                                     | ✅ `equals`, `in`, `not in`, `from`, `to`, `contains`, `notContains`, `is null`, `is not null`                                                                         |
+| **Response Formats** | ✅ JSON                                                            | ✅ JSON, **JSONL** (`limit=-1`), **StreamedJsonResponse**                                                                                                              |
+| **Pagination** | ✅ LengthAware, Simple, Cursor                                     | ✅ All Free + `limit=0` (Count only)                                                                                                                                   |
+| **Sorting** | ✅ Multi-column sorting                                            | ✅ Multi-column & **Aggregate Sorting**                                                                                                                                |
+| **Relational Loading** | ✅ `withRelations`, `withRelationsCount`, `withRelationsExistence` | ✅ All Free + `with appends`, `with distinct relations`                                                                                                                |
+| **Relation Constraints** | ❌                                                                 | ✅ `has relations`, `doesn't have relations`, `has distinct relations`                                                                                                 |
 | **Custom Deep Relations** | ❌                                                                 | ✅ `HasManySelfThroughSelf`, `HasManyThrough2LinkTables`, `HasManyThrough3LinkTables`, `HasOneSelfThroughSelf`, `HasOneThrough2LinkTables`, `HasOneThrough3LinkTables` |
-| **Aggregations** | ❌                                                                 | ✅ Sums, Averages, Minimums, Maximums, Distinct column(s) fetching |
-| **Elasticsearch KPIs** | ❌                                                                 | ✅ **Real-time Aggregations** on ES Indexes |
-| **Group By & Subtotals** | ❌                                                                 | ✅ Group By, Sub-totals, Sub-averages, Sub-minimums, Sub-maximums |
-| **Group Constraints** | ❌                                                                 | ✅ Count Distinct, Group Count, Havings (including relation counts) |
-| **DB Protection / Guardrails** | ❌                                                                 | ✅ API Timeout blocks (MySQL/MariaDB), MVCC `select count(*)` slow query fix |
+| **Aggregations** | ❌                                                                 | ✅ Sums, Averages, Minimums, Maximums, Distinct column(s) fetching                                                                                                     |
+| **Elasticsearch KPIs** | ❌                                                                 | ✅ **Real-time Aggregations** on ES Indexes                                                                                                                            |
+| **Group By & Subtotals** | ❌                                                                 | ✅ Group By, Sub-totals, Sub-averages, Sub-minimums, Sub-maximums                                                                                                      |
+| **Group Constraints** | ❌                                                                 | ✅ Count Distinct, Group Count, Havings (including relation counts)                                                                                                    |
+| **DB Protection / Guardrails** | ❌                                                                 | ✅ API Timeout blocks (MySQL/MariaDB), MVCC `select count(*)` slow query fix                                                                                           |
 
 
 
@@ -40,7 +40,7 @@ With the free version, you can instantly pull resources, load their relationship
 * *Example (Free):* `GET /operations?currency=EUR&withRelationsCount[]=products` (Get all operations where currency exactly equals EUR and include the count of related products).
 
 #### The Pro Advantage
-When your data logic gets complex, the paid version of WizardQL replaces hundreds of lines of Obvious sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
+When your data logic gets complex, the paid version of CruXdQL replaces hundreds of lines of Obvious sub-queries, aggregations, and groupings. It also includes built-in safeguards against API-triggered database blocking.
 * *Example (Pro):* `GET /operations?currency[in][]=EUR&currency[in][]=USD&withSum=value` (Get operations where currency is IN [EUR, USD] and include the total sum of their values).
 
 ## Url query language lib for RESTful CRUD (micro) services
