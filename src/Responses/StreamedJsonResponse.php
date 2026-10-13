@@ -82,6 +82,13 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *                  'Accept': 'application/json'
  *              }, body: new URLSearchParams(new FormData(form))})
  *              .then(response => {
+ *                  if (!response.headers.get('metadata')) {
+ *                      outputElement.innerHTML =
+ *                          '<b style="color:red">⚠️ Streaming not supported by this backend engine.</b>';
+ *
+ *                      throw new Error('Backend did not return a stream.');
+ *                  }
+ *
  *                  const reader = response.body.getReader();
  *                  const decoder = new TextDecoder();
  *                  let leftOver = '';
