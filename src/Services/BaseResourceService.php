@@ -88,7 +88,12 @@ abstract class BaseResourceService implements ResourceServiceInterface
                 $filters !== []
                 && [] === \array_filter(
                     GeneralHelper::filterDataByKeys($filters, $possibleSortColumns),
-                    fn(mixed $filter): bool => !\is_array($filter) || isset($filter['from']) || isset($filter['to'])
+                    fn(mixed $filter): bool => !\is_array($filter) || (
+                        (isset($filter['from']) || isset($filter['to'])) && [] === \array_diff_key(
+                            $filter,
+                            ['from' => null, 'to' => null]
+                        )
+                    )
                 )
             ) {
                 throw new \Exception('Ignoring filters');
