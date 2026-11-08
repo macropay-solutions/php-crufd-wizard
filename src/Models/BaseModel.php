@@ -385,16 +385,6 @@ abstract class BaseModel extends Model
         return $this->escapeWhenCastingToString;
     }
 
-    public function attributeOffsetUnset(string $offset): void
-    {
-        unset($this->attributes[$offset]);
-    }
-
-    public function attributeOffsetExists(string $offset): bool
-    {
-        return isset($this->attributes[$offset]);
-    }
-
     /**
      * @inheritDoc
      * @throws \Exception
