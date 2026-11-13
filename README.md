@@ -273,6 +273,9 @@ The new way of handling it:
 
 
 ### III. Crud routes
+
+**Status codes:** failures answer `400` with a `message` (validation failures also carry `errors`). The lib does not use `404` or `422`. This is on purpose: fewer status codes are simpler for clients to handle and tell scanners less. List requests never fail (see [III.3](#iii3-list-filtered-resource)).
+
 ```The identifier can be a primary key or a combination of primary keys with _ between them if the resource has a combined primary key!!!```
 
 see \MacropaySolutions\CrufdWizard\Models\BaseModel::COMPOSITE_PK_SEPARATOR
@@ -461,6 +464,7 @@ The reserved words / parameters that will be used as query params are:
         withRelations,
         withRelationsCount,
         withRelationsExistence,
+        logError,
 
 
 Defaults:
@@ -477,6 +481,8 @@ Obs.
     use ?cursor= for cursor pagination and ?simplePaginate=1 for simplePaginate. Use none of them for length aware paginator.
     if \MacropaySolutions\Kernel\Http\Middleware\ConvertEmptyStringsToNull::class is used use ?cursor=1 instead of emtpy string
     sort works also on aggregated colums for relation count and existence
+
+**List requests never fail.** An invalid list query (for example an unknown column, an invalid sort or a list that is forbidden) returns `200` with an empty page instead of an error. This is on purpose: the response tells the client nothing about the schema. Add `logError` (any value) to the request to log the reason on the server, for example while developing a frontend.
 
 
 #### III.4 Update resource (or create)
