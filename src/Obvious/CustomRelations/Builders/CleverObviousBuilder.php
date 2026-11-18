@@ -97,9 +97,9 @@ class CleverObviousBuilder extends Builder
         }
 
         $this->eagerLoad = \array_merge($this->eagerLoad, $this->parseWithRelations(
-            (\is_array($relations) && \array_values($relations) === $relations) ?
+            (\is_array($relations) && \array_is_list($relations)) ?
                 \array_map(
-                    fn(string $relation): \Closure => $callback,
+                    static fn(int $relation): \Closure => $callback,
                     \array_flip($relations)
                 ) :
                 [$relations => $callback]
