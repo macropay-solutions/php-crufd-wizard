@@ -141,7 +141,7 @@ abstract class BaseModel extends Model
     /**
      * @inheritDoc
      */
-    public function setAttribute(mixed $key, mixed $value): static
+    public function setAttribute(string $key, mixed $value): static
     {
         if (!$this->exists) {
             return parent::setAttribute($key, $value);
