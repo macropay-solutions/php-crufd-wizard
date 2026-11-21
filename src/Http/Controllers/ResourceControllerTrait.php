@@ -10,6 +10,7 @@ use MacropaySolutions\CrufdWizard\Services\ResourceServiceInterface;
 use MacropaySolutions\Kernel\Database\Obvious\Builder;
 use MacropaySolutions\Kernel\Database\Obvious\ModelNotFoundException;
 use MacropaySolutions\Kernel\Database\Obvious\Relations\Relation;
+use MacropaySolutions\Kernel\Http\Exceptions\HttpRequestException;
 use MacropaySolutions\Kernel\Http\JsonResponse;
 use MacropaySolutions\Kernel\Http\Request;
 use MacropaySolutions\Kernel\Pagination\CursorPaginator;
@@ -49,12 +50,21 @@ trait ResourceControllerTrait
     protected bool $forbidDelete = true;
 
     /**
+     * Set when the request is created: a field sent both in query and body, or both as a value and as a file.
+     * Thrown right away only with
+     * @see Request::REQUEST_THROWS_ON_KEYS_COLLISION; otherwise the code may throw it later,
+     * e.g. Not readonly: initialize() runs again in createFrom().
+     */
+    protected ?HttpRequestException $keysCollisionException = null;
+
+    /**
      * @throws \Throwable
      */
     protected function init(): void
     {
         $this->setModelFqnToControllerMap();
         $this->setResourceService();
+        $this->keysCollisionException = \request()->keysCollisionException;
         $this->label = $this->resourceService->getResourceName();
     }
 
@@ -483,6 +493,10 @@ trait ResourceControllerTrait
     {
         if ($condition) {
             throw new \Exception('Forbidden');
+        }
+
+        if (isset($this->keysCollisionException)) {
+            throw $this->keysCollisionException;
         }
     }
 

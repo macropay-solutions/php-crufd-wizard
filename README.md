@@ -276,6 +276,8 @@ The new way of handling it:
 
 **Status codes:** failures answer `400` with a `message` (validation failures also carry `errors`). The lib does not use `404` or `422`. This is on purpose: fewer status codes are simpler for clients to handle and tell scanners less. List requests never fail (see [III.3](#iii3-list-filtered-resource)).
 
+**Fields sent twice (HTTP Parameter Pollution):** a request that sends the same field both in the query string and in the body, or both as a value and as a file, is ambiguous: the validated value could differ from the one that is saved. With php-kernel ^1.8.1 every crud route rejects it: create, get, update and delete answer `400` with `"message": "A field was sent both in query and body."` or `"A field was sent both as a value and as a file."`, and a list returns an empty page. The same value sent twice (`?page=1` and `page=1` in the body) is allowed. The check runs in `throwIfForbidden()`, so a controller that overrides it must call `parent::throwIfForbidden()`. To reject such requests before any controller runs, set `public const REQUEST_THROWS_ON_KEYS_COLLISION = true;` in your `\App\Request` (see the php-kernel [requests docs](https://macropay-solutions.github.io/php-framework-docs/1.x/requests#fields-sent-twice)).
+
 ```The identifier can be a primary key or a combination of primary keys with _ between them if the resource has a combined primary key!!!```
 
 see \MacropaySolutions\CrufdWizard\Models\BaseModel::COMPOSITE_PK_SEPARATOR
