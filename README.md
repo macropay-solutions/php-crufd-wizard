@@ -101,6 +101,14 @@ Use https://github.com/macropay-solutions/php-crufd-wizard-generator to generate
 
 Create a Controller that uses ResourceControllerTrait and call `$this->init();` from its __construct.
 
+Implement `validateCreateRequest(Request $request): array` and `validateUpdateRequest(Request $request): array`.
+Return the validated data: only the returned array is saved. The request passed to them holds only the model's
+columns (on update only the dirty ones); after validation the original request is restored, so the service can
+still read other request data (e.g. credentials) from `\request()`.
+
+**Files** are not handled by the default `create()` / `update()`. A resource that accepts uploaded files must
+override them and read the files with `$request->file()`.
+
 Optionally if you don't want to expose some models as resources but, you want to expose them as relation on an exposed resource then define in your Base Controller or ResourceController:
 
 ```php
@@ -536,7 +544,7 @@ Update is not available on some resources.
 
 **UpdateOrCreate** is available on resources that have their model defined with incrementing = false ONLY if the request contains all the keys from the primary key (found also in function getPrimaryKeyFilter).
 
-Update will validate only dirty columns, not all sent columns, meaning the update can be made with all columns of the resource instead of just the changed ones.
+Update will validate only dirty columns, not all sent columns, meaning the update can be made with all columns of the resource instead of just the changed ones, and will save only what `validateUpdateRequest()` returns.
 
 
 #### III.5 Delete resource
