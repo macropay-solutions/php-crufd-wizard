@@ -106,8 +106,9 @@ Return the validated data: only the returned array is saved. The request passed 
 columns (on update only the dirty ones); after validation the original request is restored, so the service can
 still read other request data (e.g. credentials) from `\request()`.
 
-**Files** are not handled by the default `create()` / `update()`. A resource that accepts uploaded files must
-override them and read the files with `$request->file()`.
+**Files** are not stored by the default `create()` / `update()`. Handle them either in the service (give the file
+field a validation rule so `validated()` contains the uploaded file, or read it with `\request()->file()`), or by
+overriding `create()` / `update()` in the controller.
 
 Optionally if you don't want to expose some models as resources but, you want to expose them as relation on an exposed resource then define in your Base Controller or ResourceController:
 
