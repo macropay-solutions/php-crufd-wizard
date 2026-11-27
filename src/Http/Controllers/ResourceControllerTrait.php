@@ -20,7 +20,7 @@ use MacropaySolutions\Kernel\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Call $this->>init() on the constructor where this trait is used
+ * Call $this->init() on the constructor where this trait is used
  */
 trait ResourceControllerTrait
 {
@@ -80,18 +80,19 @@ trait ResourceControllerTrait
     {
         try {
             $this->throwIfForbidden($this->forbidCreate);
+            $all = $request->all();
             /** $request can contain also files so, overwrite this function to handle them */
+            $validatedPayload = $this->validateCreateRequest($request->forceReplace(GeneralHelper::filterDataByKeys(
+                $all,
+                \array_diff(
+                    $this->resourceService->getModelColumns(),
+                    $this->resourceService->getIgnoreExternalCreateFor()
+                )
+            )));
+            $request->forceReplace($all);
 
             return GeneralHelper::app(JsonResponse::class, [
-                'data' => $this->resourceService->create($this->validateCreateRequest(
-                    $request->forceReplace(GeneralHelper::filterDataByKeys(
-                        $request->all(),
-                        \array_diff(
-                            $this->resourceService->getModelColumns(),
-                            $this->resourceService->getIgnoreExternalCreateFor()
-                        )
-                    ))
-                ))->toArray(),
+                'data' => $this->resourceService->create($validatedPayload)->toArray(),
                 'status' => 201
             ]);
         } catch (ValidationException | CrudValidationException $e) {
@@ -145,7 +146,8 @@ trait ResourceControllerTrait
             ]);
         } catch (\Throwable $e) {
             if (!$e instanceof ModelNotFoundException) {
-                \app('log')->error($this->label . ' get for identifier: ' . $identifier . ', error = ' . $e->getMessage());
+                \app('log')->error($this->label . ' get for identifier: ' . $identifier . ', error = ' .
+                    $e->getMessage());
             }
 
             return GeneralHelper::app(JsonResponse::class, [
@@ -177,10 +179,11 @@ trait ResourceControllerTrait
                 $model = $this->resourceService->get($identifier, appendIndex: false)->fill($toFill);
                 /** $request can contain also files so, overwrite this function to handle them */
                 $request->forceReplace($model->getDirty(\array_keys($toFill)));
+                $validatedPayload = $this->validateUpdateRequest($request);
+                $request->forceReplace($all);
 
                 return GeneralHelper::app(JsonResponse::class, [
-                    'data' => $this->resourceService->update($identifier, $this->validateUpdateRequest($request))
-                        ->toArray(),
+                    'data' => $this->resourceService->update($identifier, $validatedPayload)->toArray(),
                     'status' => 200
                 ]);
             } catch (ModelNotFoundException $e) {
@@ -201,7 +204,8 @@ trait ResourceControllerTrait
                 'status' => 400
             ]);
         } catch (\Throwable $e) {
-            \app('log')->error($this->label . ' update for identifier: ' . $identifier . ', error = ' . $e->getMessage());
+            \app('log')->error($this->label . ' update for identifier: ' . $identifier . ', error = ' .
+                $e->getMessage());
 
             return GeneralHelper::app(JsonResponse::class, [
                 'data' => ['message' => GeneralHelper::getSafeErrorMessage($e)],
@@ -220,7 +224,8 @@ trait ResourceControllerTrait
             ]);
         } catch (\Throwable $e) {
             if (!$e instanceof ModelNotFoundException) {
-                \app('log')->error($this->label . ' delete for identifier: ' . $identifier . ', error = ' . $e->getMessage());
+                \app('log')->error($this->label . ' delete for identifier: ' . $identifier . ', error = ' .
+                    $e->getMessage());
             }
 
             return GeneralHelper::app(JsonResponse::class, [
@@ -266,7 +271,8 @@ trait ResourceControllerTrait
             return $this->getJsonResponse($paginator, $appends ?? []);
         } catch (\Throwable $e) {
             if (isset($allRequest['logError'])) {
-                \app('log')->error($this->label . ' list for ' . \json_encode($allRequest) . ', error = ' . $e->getMessage());
+                \app('log')->error($this->label . ' list for ' . \json_encode($allRequest) . ', error = ' .
+                    $e->getMessage());
             }
 
             return $this->getEmptyPaginatedResponse($allRequest);
@@ -530,7 +536,8 @@ trait ResourceControllerTrait
     ): BaseModel {
         $this->validateRelation($relation);
         /** @var Relation $relationInstance */
-        $relationInstance = $this->resourceService->get($identifier, appendIndex: false)->callSegregatedRelation($relation);
+        $relationInstance = $this->resourceService->get($identifier, appendIndex: false)
+            ->callSegregatedRelation($relation);
         /** @var BaseModel $related */
         $related = $relationInstance->getRelated();
         $exploded = \explode($related::COMPOSITE_PK_SEPARATOR, $relatedIdentifier);
